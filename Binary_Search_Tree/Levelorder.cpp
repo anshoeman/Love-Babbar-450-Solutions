@@ -12,7 +12,7 @@ Repeat the same step
 #include <iostream>
 #include <stdlib.h>
 #include <queue>
-
+#include <vector>
 using namespace std;
 class Node
 {
@@ -86,6 +86,7 @@ void Tree::createTree()
 void Tree::LevelOrder(Node *p)
 {
     queue<Node*> q;
+    vector<int> ans;
     cout << p->data << "," << flush; /*stores the values as permanent values in hardisk*/
     q.push(p);                    /*adds the element in the end*/
     while (!q.empty())               /*unless and untill queue is empty ie all the element has to be traversed*/
@@ -95,13 +96,20 @@ void Tree::LevelOrder(Node *p)
         if (p->lchild)
         {
             cout << p->lchild->data << "," << flush; /*p pointing on the root and then going to the lchild and then pointing at the data*/
-            q.push(p->lchild);/*push lchild in the queue*/
+            ans.push_back(p->lchild->data);/*answer is pushed in the vector*/
+            q.push(p->lchild); /*push lchild in the queue*/
         }
         else
         {
             cout << p->rchild->data << "," << flush;
-            q.push(p->rchild);/*push right child in the queue*/
+            ans.push_back(p->rchild->data);/*answer is pushed down in the following*/
+            q.push(p->rchild); /*push right child in the queue*/
         }
+    }
+    reverse(ans.begin(), ans.end());
+    for (int i = 0; i < ans.size(); i++)
+    {
+        cout << ans[i]<<"ans";
     }
 }
 
